@@ -145,7 +145,7 @@ class VDC(object):
             self.href = self.resource.get('href')
 
     def query_vm_by_name(self, name):
-        """Query a VM by name.
+        """Query a VM by name using Admin API.
 
         :param str name: name of the VM.
 
@@ -160,7 +160,7 @@ class VDC(object):
         vdc_filter = ('vdc==%s' % urllib.parse.quote(self.href))
         name_filter = ('name', name)
         query_obj = self.client.get_typed_query(
-            ResourceType.ADMIN_VM.value,
+            ResourceType.VM.value,
             qfilter=vdc_filter,
             equality_filter=name_filter)
         vm_href = query_obj.find_unique().get('href')
